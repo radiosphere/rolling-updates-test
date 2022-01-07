@@ -1,0 +1,3 @@
+#!/bin/sh
+
+curl -s localhost:$1/q/metrics | grep "^$2 " | awk '{print $2}'

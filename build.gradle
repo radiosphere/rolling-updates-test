@@ -1,0 +1,79 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version "1.5.31"
+    id "org.jetbrains.kotlin.plugin.allopen" version "1.5.31"
+    id 'io.quarkus'
+    id "com.google.protobuf" version "0.8.18"
+}
+
+repositories {
+//    mavenLocal()
+//    maven {
+//        url("https://maven.pkg.github.com/radiosphere/infinispan")
+//        credentials(HttpHeaderCredentials) {
+//            name = "Authorization"
+//            value = "Bearer ${project.findProperty("gpr.token") ?: System.getenv("GPR_TOKEN")}"
+//        }
+//        authentication {
+//            register("header", HttpHeaderAuthentication)
+//        }
+//    }
+    mavenCentral()
+//    flatDir {
+//        dirs 'lib'
+//    }
+}
+
+dependencies {
+
+    implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
+    implementation 'io.quarkus:quarkus-kotlin'
+    implementation 'io.quarkus:quarkus-resteasy-jackson'
+    implementation 'io.quarkus:quarkus-micrometer-registry-prometheus'
+    implementation 'org.jboss.logmanager:log4j2-jboss-logmanager'
+
+    implementation 'io.quarkus:quarkus-micrometer-registry-prometheus'
+    implementation 'io.quarkus:quarkus-smallrye-health'
+//    implementation 'io.quarkus:quarkus-logging-gelf'
+    implementation 'io.quarkus:quarkus-config-yaml'
+//    implementation 'io.quarkus:quarkus-infinispan-client'
+
+//    implementation name: 'infinispan-clustered-lock-14.0.0-SNAPSHOT-jar-with-dependencies'
+//    implementation name: 'infinispan-clustered-lock-14.0.0-SNAPSHOT'
+//    implementation name: 'infinispan-commons-14.0.0-SNAPSHOT'
+//    implementation name: 'infinispan-core-14.0.0-SNAPSHOT'
+
+    implementation 'org.infinispan:infinispan-core:13.0.0.Final'
+    implementation 'org.infinispan:infinispan-clustered-lock:13.0.0.Final'
+//    implementation 'org.infinispan:infinispan-core-new-2:13.0.0.Final'
+//    implementation 'org.infinispan:infinispan-clustered-lock-new-2:13.0.0.Final'
+
+    implementation 'org.apache.camel.quarkus:camel-quarkus-nats:2.2.0'
+
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
+    implementation 'io.quarkus:quarkus-arc'
+
+    testImplementation 'io.quarkus:quarkus-junit5'
+}
+
+group 'io.radiosphere'
+version '1.0.0-SNAPSHOT'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
+allOpen {
+    annotation("javax.ws.rs.Path")
+    annotation("javax.enterprise.context.ApplicationScoped")
+    annotation("io.quarkus.test.junit.QuarkusTest")
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = JavaVersion.VERSION_11
+    kotlinOptions.javaParameters = true
+}
+
+compileTestKotlin {
+    kotlinOptions.jvmTarget = JavaVersion.VERSION_11
+}

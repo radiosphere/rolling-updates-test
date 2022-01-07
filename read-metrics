@@ -1,0 +1,14 @@
+#!/bin/sh
+
+SUM=0
+
+METRIC_NAME=$1
+
+shift
+for var in "$@"
+do
+  NUM=`./read-metric $var $METRIC_NAME`
+  SUM=`echo $SUM + $NUM | bc`
+done
+
+echo Sum is: $SUM

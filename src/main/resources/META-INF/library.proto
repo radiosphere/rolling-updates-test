@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package test;
+
+option java_package = "io.radiosphere.exactlyoncepoc.cache";
+option java_outer_classname = "CounterState";
+
+message CounterState {
+  int64 index = 1;
+}

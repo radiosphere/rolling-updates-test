@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: rolling-updates-test-ping
+  namespace: default
+  annotations:
+    description: The JGroups ping service for clustering discovery.
+spec:
+  clusterIP: None
+  publishNotReadyAddresses: true
+  selector:
+    app: rolling-updates-test
+    variant: jvm
+    version: stable

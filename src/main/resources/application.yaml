@@ -1,0 +1,20 @@
+quarkus:
+#  infinispan-client:
+#    devservices:
+#      enabled: false
+  log:
+    level: INFO
+    category:
+#      "org.infinispan.lock.impl.lock":
+#        level: FATAL
+#      "org.infinispan":
+#        level: TRACE
+#      "org.infinispan.interceptors":
+#        level: TRACE
+#      "org.infinispan.remoting.transport.jgroups":
+#        level: TRACE
+      "io.radiosphere":
+        level: INFO
+    min-level: TRACE
+"%prod":
+  nats-url: nats-0.nats
